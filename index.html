@@ -1,41 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fullscreen Video Landing</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save The Date | Kartik & Apoorvaa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .font-script { font-family: 'Pinyon Script', cursive; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Background Video - Fixed positioning to stay behind content */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.45);
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-    .video-container {
-      width: 100vw;
-      height: 100vh;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* fills full screen */
-    }
-  </style>
+        .animate-fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        .hashtag {
+            letter-spacing: 0.3em;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Hide scrollbar for clean look but allow scrolling on small heights */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
-  <div class="video-container">
-    <video autoplay muted loop playsinline>
-      <source src="your-video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
+<body class="font-sans text-white bg-black no-scrollbar overflow-y-auto min-h-screen">
+
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline id="bg-video" poster="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1920">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-wedding-couple-walking-in-a-forest-42283-large.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
-  </div>
+
+    <!-- Content Overlay -->
+    <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 text-center">
+        
+        <!-- Header Section -->
+        <div class="animate-fade-in opacity-0" style="animation-delay: 0.3s;">
+            <p class="uppercase tracking-[0.4em] text-[9px] md:text-xs mb-4 opacity-70">The Journey of Love</p>
+            <h1 class="font-script text-6xl sm:text-7xl md:text-9xl mb-2 text-amber-100 leading-tight">Kartik & Apoorvaa</h1>
+            <h2 class="text-lg md:text-2xl font-light tracking-widest italic opacity-90 px-4">Are Beginning Their Forever</h2>
+            <p class="hashtag mt-4 md:mt-6 text-amber-200 font-semibold text-xs md:text-base">#pyaarkakarvaa</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="glass-card mt-10 md:mt-14 p-6 md:p-10 rounded-[2rem] max-w-lg md:max-w-2xl w-full animate-fade-in opacity-0" style="animation-delay: 0.8s;">
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+                <div class="flex flex-col border-r border-white/10 last:border-0">
+                    <span id="days" class="text-3xl sm:text-4xl md:text-6xl font-semibold text-amber-50">00</span>
+                    <p class="text-[8px] md:text-[10px] uppercase tracking-widest mt-2 opacity-60">Days</p>
+                </div>
+                <div class="flex flex-col border-r border-white/10 last:border-0">
+                    <span id="hours" class="text-3xl sm:text-4xl md:text-6xl font-semibold text-amber-50">00</span>
+                    <p class="text-[8px] md:text-[10px] uppercase tracking-widest mt-2 opacity-60">Hours</p>
+                </div>
+                <div class="flex flex-col border-r border-white/10 last:border-0">
+                    <span id="minutes" class="text-3xl sm:text-4xl md:text-6xl font-semibold text-amber-50">00</span>
+                    <p class="text-[8px] md:text-[10px] uppercase tracking-widest mt-2 opacity-60">Mins</p>
+                </div>
+                <div class="flex flex-col">
+                    <span id="seconds" class="text-3xl sm:text-4xl md:text-6xl font-semibold text-amber-50">00</span>
+                    <p class="text-[8px] md:text-[10px] uppercase tracking-widest mt-2 opacity-60">Secs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-10 md:mt-14 animate-fade-in opacity-0 flex flex-col items-center w-full" style="animation-delay: 1.3s;">
+            <p class="text-xs md:text-lg mb-8 tracking-wide font-light opacity-80">Digital Invitation & Details arriving shortly.</p>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full max-w-sm sm:max-w-none">
+                <button onclick="showModal()" class="w-full sm:w-auto border border-white/30 px-10 py-4 rounded-full hover:bg-white hover:text-black transition duration-500 uppercase text-[10px] tracking-widest font-bold backdrop-blur-sm active:scale-95">
+                    Notify Me
+                </button>
+                <button class="w-full sm:w-auto bg-amber-100 text-black px-10 py-4 rounded-full hover:bg-white transition duration-500 uppercase text-[10px] tracking-widest font-bold shadow-xl active:scale-95">
+                    Save the Date
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 sm:absolute sm:bottom-8 w-full text-center text-[9px] uppercase tracking-[0.5em] opacity-40">
+            April 25, 2026 • India
+        </footer>
+    </main>
+
+    <!-- Modal for Notification -->
+    <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl transition-all duration-300">
+        <div class="glass-card p-8 md:p-12 rounded-[2.5rem] max-w-md w-full text-center">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-amber-50">Join the Celebration</h3>
+            <p class="text-xs md:text-sm opacity-70 mb-8 leading-relaxed px-4">Leave your email to receive the digital invitation and event details directly in your inbox.</p>
+            <div class="space-y-4">
+                <input type="email" placeholder="Your email address" class="w-full bg-white/5 border border-white/20 rounded-2xl px-6 py-4 focus:outline-none focus:ring-1 focus:ring-amber-200 transition-all text-sm">
+                <button onclick="hideModal()" class="w-full bg-amber-100 text-black py-4 rounded-2xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-white transition-all active:scale-95">Submit</button>
+                <button onclick="hideModal()" class="text-[10px] opacity-40 uppercase tracking-widest hover:opacity-100 transition-opacity pt-2">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wedding Date: April 25, 2026
+        const weddingDate = new Date("April 25, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const dEl = document.getElementById("days");
+            const hEl = document.getElementById("hours");
+            const mEl = document.getElementById("minutes");
+            const sEl = document.getElementById("seconds");
+
+            if(dEl) dEl.innerText = days < 0 ? "00" : days.toString().padStart(2, '0');
+            if(hEl) hEl.innerText = hours < 0 ? "00" : hours.toString().padStart(2, '0');
+            if(mEl) mEl.innerText = minutes < 0 ? "00" : minutes.toString().padStart(2, '0');
+            if(sEl) sEl.innerText = seconds < 0 ? "00" : seconds.toString().padStart(2, '0');
+
+            if (distance < 0) clearInterval(timer);
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        function showModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
 </body>
 </html>
