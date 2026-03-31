@@ -10,6 +10,26 @@
         .font-script { font-family: 'Pinyon Script', cursive; }
         .font-sans { font-family: 'Montserrat', sans-serif; }
         
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         /* Background Video - Fixed positioning to stay behind content */
         #bg-video {
             position: fixed;
@@ -49,6 +69,12 @@
     </style>
 </head>
 <body class="font-sans text-white bg-black no-scrollbar overflow-y-auto min-h-screen">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <!-- REPLACE THIS URL with your actual GIF URL -->
+        <img src="down.gif" alt="Loading..." class="w-32 h-32 md:w-48 md:h-48 object-contain">
+    </div>
 
     <!-- Background Video -->
     <video autoplay muted loop playsinline id="bg-video" poster="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1920">
@@ -122,6 +148,15 @@
     </div>
 
     <script>
+        // Preloader handling
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            // Small delay to ensure smooth transition
+            setTimeout(() => {
+                preloader.classList.add('fade-out');
+            }, 500);
+        });
+
         // Wedding Date: April 25, 2026
         const weddingDate = new Date("April 25, 2026 00:00:00").getTime();
 
@@ -148,7 +183,7 @@
         }
 
         const timer = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
+        updateCountdown();
 
         function showModal() {
             const modal = document.getElementById('modal');
